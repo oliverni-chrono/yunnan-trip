@@ -7,17 +7,15 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700&family=Noto+Sans+SC:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <!-- 高德地图API - 请在config.js中配置您的API Key -->
-    <script src="config.js"></script>
+    <!-- 高德地图API - 已配置域名白名单保护 -->
     <script>
+        // 高德地图API Key（通过域名白名单保护，仅限授权域名使用）
+        window.AMAP_KEY = '8995e9619280002d674be4dfe43b8b9c';
+        
         // 动态加载高德地图API
         window.amapLoaded = false;
         (function() {
-            var key = window.AMAP_KEY || '';
-            if (!key) {
-                console.warn('请在config.js中配置AMAP_KEY');
-                return;
-            }
+            var key = window.AMAP_KEY;
             var script = document.createElement('script');
             script.src = 'https://webapi.amap.com/maps?v=1.4.15&key=' + key;
             script.onload = function() {
