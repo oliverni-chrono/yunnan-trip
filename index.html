@@ -11,13 +11,19 @@
     <script src="config.js"></script>
     <script>
         // 动态加载高德地图API
+        window.amapLoaded = false;
         (function() {
             var key = window.AMAP_KEY || '';
             if (!key) {
                 console.warn('请在config.js中配置AMAP_KEY');
+                return;
             }
             var script = document.createElement('script');
             script.src = 'https://webapi.amap.com/maps?v=1.4.15&key=' + key;
+            script.onload = function() {
+                window.amapLoaded = true;
+                if (window.onAmapReady) window.onAmapReady();
+            };
             document.head.appendChild(script);
         })();
     </script>
@@ -1549,23 +1555,34 @@
         }
 
         // Initialize
-        document.addEventListener('DOMContentLoaded', () => {
-            // Check if AMap is loaded
+        function tryInitMap() {
             if (typeof AMap !== 'undefined') {
                 initMap();
-            } else {
+            } else if (!window.AMAP_KEY) {
                 console.warn('高德地图API未加载，请配置API Key');
                 document.getElementById('map').innerHTML = `
                     <div style="display:flex;align-items:center;justify-content:center;height:100%;background:#f5f5f5;flex-direction:column;gap:16px;">
                         <div style="font-size:48px;">🗺️</div>
                         <div style="font-size:16px;color:#666;">请配置高德地图API Key</div>
-                        <div style="font-size:12px;color:#999;">在 index.html 中替换 your_amap_key_here</div>
+                        <div style="font-size:12px;color:#999;">复制 config.example.js 为 config.js 并填入Key</div>
                         <a href="https://lbs.amap.com/api/javascript-api-v2/guide/abc/prepare" target="_blank" 
                            style="font-size:13px;color:#4A7C59;text-decoration:underline;">
                             获取高德地图API Key →
                         </a>
                     </div>
                 `;
+            }
+        }
+
+        // Wait for AMap to load
+        window.onAmapReady = function() {
+            tryInitMap();
+        };
+
+        document.addEventListener('DOMContentLoaded', () => {
+            // If AMap already loaded, init immediately
+            if (window.amapLoaded) {
+                tryInitMap();
             }
         });
     </script>
