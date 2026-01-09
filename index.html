@@ -1,0 +1,1574 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>老挝+云南8天7夜 | 万象·万荣·景迈山·大理·丽江</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700&family=Noto+Sans+SC:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- 高德地图API - 请在config.js中配置您的API Key -->
+    <script src="config.js"></script>
+    <script>
+        // 动态加载高德地图API
+        (function() {
+            var key = window.AMAP_KEY || '';
+            if (!key) {
+                console.warn('请在config.js中配置AMAP_KEY');
+            }
+            var script = document.createElement('script');
+            script.src = 'https://webapi.amap.com/maps?v=1.4.15&key=' + key;
+            document.head.appendChild(script);
+        })();
+    </script>
+    <style>
+        :root {
+            --tea-green: #4A7C59;
+            --tea-light: #7CB890;
+            --warm-orange: #E07A5F;
+            --warm-gold: #F2CC8F;
+            --cream: #FAF8F5;
+            --dark: #1A1A1A;
+            --gray-600: #4A4A4A;
+            --gray-400: #8A8A8A;
+            --day1-color: #E74C3C;
+            --day2-color: #E67E22;
+            --day3-color: #F39C12;
+            --day4-color: #27AE60;
+            --day5-color: #4A7C59;
+            --day6-color: #3D84A8;
+            --day7-color: #9B59B6;
+            --day8-color: #E91E63;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Noto Sans SC', sans-serif;
+            background: var(--cream);
+            color: var(--dark);
+            min-height: 100vh;
+        }
+
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, var(--tea-green) 0%, #2D5A3D 100%);
+            color: white;
+            padding: 24px 32px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -10%;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+
+        .header h1 {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 8px;
+            position: relative;
+        }
+
+        .header p {
+            font-size: 14px;
+            opacity: 0.9;
+            position: relative;
+        }
+
+        .header-stats {
+            display: flex;
+            gap: 24px;
+            margin-top: 16px;
+            position: relative;
+        }
+
+        .stat {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 13px;
+            background: rgba(255,255,255,0.15);
+            padding: 8px 14px;
+            border-radius: 20px;
+        }
+
+        .stat-icon {
+            font-size: 16px;
+        }
+
+        /* Main Layout */
+        .main-container {
+            display: grid;
+            grid-template-columns: 420px 1fr;
+            height: calc(100vh - 130px);
+        }
+
+        /* Sidebar */
+        .sidebar {
+            background: white;
+            overflow-y: auto;
+            overflow-x: hidden;
+            border-right: 1px solid #E5E5E5;
+            padding-bottom: 100px;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .sidebar::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .sidebar::-webkit-scrollbar-thumb {
+            background: var(--tea-light);
+            border-radius: 3px;
+        }
+
+        .sidebar::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+
+        /* Day Card */
+        .day-card {
+            border-bottom: 1px solid #EEEEEE;
+        }
+
+        .day-card:last-child {
+            border-bottom: none;
+            margin-bottom: 20px;
+        }
+
+        .day-header {
+            display: flex;
+            align-items: center;
+            padding: 16px 20px;
+            cursor: pointer;
+            transition: background 0.2s;
+            position: relative;
+        }
+
+        .day-header:hover {
+            background: #FAFAFA;
+        }
+
+        .day-badge {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 600;
+            margin-right: 14px;
+            flex-shrink: 0;
+        }
+
+        .day-badge span:first-child {
+            font-size: 11px;
+            opacity: 0.9;
+        }
+
+        .day-badge span:last-child {
+            font-size: 18px;
+            line-height: 1;
+        }
+
+        .day-info {
+            flex: 1;
+        }
+
+        .day-title {
+            font-size: 15px;
+            font-weight: 600;
+            color: var(--dark);
+            margin-bottom: 4px;
+        }
+
+        .day-subtitle {
+            font-size: 12px;
+            color: var(--gray-400);
+        }
+
+        .day-toggle {
+            width: 28px;
+            height: 28px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--gray-400);
+            transition: transform 0.3s;
+        }
+
+        .day-card.active .day-toggle {
+            transform: rotate(180deg);
+        }
+
+        .day-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease;
+            background: #FAFAFA;
+        }
+
+        .day-card.active .day-content {
+            max-height: 2000px;
+            overflow: visible;
+        }
+
+        .day-content-inner {
+            padding: 0 20px 20px 20px;
+        }
+
+        /* Timeline */
+        .timeline {
+            position: relative;
+            padding-left: 24px;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 6px;
+            top: 8px;
+            bottom: 8px;
+            width: 2px;
+            background: #E0E0E0;
+        }
+
+        .timeline-item {
+            position: relative;
+            padding: 12px 0;
+            padding-bottom: 16px;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -18px;
+            top: 18px;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: white;
+            border: 2px solid var(--tea-green);
+        }
+
+        .timeline-item.highlight::before {
+            background: var(--warm-orange);
+            border-color: var(--warm-orange);
+        }
+
+        .timeline-time {
+            font-size: 12px;
+            color: var(--gray-400);
+            font-weight: 500;
+            margin-bottom: 4px;
+        }
+
+        .timeline-title {
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--dark);
+            margin-bottom: 2px;
+        }
+
+        .timeline-desc {
+            font-size: 12px;
+            color: var(--gray-400);
+            line-height: 1.5;
+        }
+
+        /* POI Tag */
+        .poi-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            background: var(--tea-green);
+            color: white;
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 11px;
+            font-weight: 500;
+            margin-top: 6px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .poi-tag:hover {
+            background: #3D6B4A;
+            transform: translateY(-1px);
+        }
+
+        /* Drive Info */
+        .drive-info {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            background: linear-gradient(135deg, #FFF8F0 0%, #FFF5EB 100%);
+            border: 1px solid var(--warm-gold);
+            border-radius: 10px;
+            padding: 12px 14px;
+            margin: 12px 0;
+        }
+
+        .drive-icon {
+            font-size: 20px;
+        }
+
+        .drive-text {
+            font-size: 13px;
+            color: var(--gray-600);
+        }
+
+        .drive-text strong {
+            color: var(--warm-orange);
+        }
+
+        /* Tips */
+        .tips-box {
+            background: linear-gradient(135deg, #F0F8F4 0%, #E8F5EC 100%);
+            border-radius: 10px;
+            padding: 14px;
+            margin-top: 12px;
+        }
+
+        .tips-title {
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--tea-green);
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .tips-list {
+            list-style: none;
+        }
+
+        .tips-list li {
+            font-size: 12px;
+            color: var(--gray-600);
+            padding: 4px 0;
+            padding-left: 16px;
+            position: relative;
+        }
+
+        .tips-list li::before {
+            content: '•';
+            position: absolute;
+            left: 4px;
+            color: var(--tea-light);
+        }
+
+        /* Map Container */
+        .map-container {
+            position: relative;
+            height: 100%;
+        }
+
+        #map {
+            width: 100%;
+            height: 100%;
+        }
+
+        /* Map Legend */
+        .map-legend {
+            position: absolute;
+            bottom: 24px;
+            left: 24px;
+            background: white;
+            border-radius: 12px;
+            padding: 16px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.12);
+            z-index: 100;
+        }
+
+        .legend-title {
+            font-size: 13px;
+            font-weight: 600;
+            margin-bottom: 12px;
+            color: var(--dark);
+        }
+
+        .legend-items {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 12px;
+            color: var(--gray-600);
+        }
+
+        .legend-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+
+        /* Map Controls */
+        .map-controls {
+            position: absolute;
+            top: 24px;
+            right: 24px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            z-index: 100;
+        }
+
+        .map-btn {
+            width: 44px;
+            height: 44px;
+            background: white;
+            border: none;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            transition: all 0.2s;
+            font-size: 18px;
+        }
+
+        .map-btn:hover {
+            background: var(--tea-green);
+            color: white;
+            transform: scale(1.05);
+        }
+
+        /* POI Popup */
+        .poi-popup {
+            padding: 12px;
+            min-width: 200px;
+        }
+
+        .poi-popup-title {
+            font-size: 15px;
+            font-weight: 600;
+            margin-bottom: 6px;
+            color: var(--dark);
+        }
+
+        .poi-popup-day {
+            font-size: 11px;
+            color: white;
+            background: var(--tea-green);
+            padding: 2px 8px;
+            border-radius: 10px;
+            display: inline-block;
+            margin-bottom: 8px;
+        }
+
+        .poi-popup-desc {
+            font-size: 12px;
+            color: var(--gray-600);
+            line-height: 1.5;
+        }
+
+        .poi-popup-nav {
+            margin-top: 10px;
+            padding-top: 10px;
+            border-top: 1px solid #EEE;
+        }
+
+        .poi-popup-nav a {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 12px;
+            color: var(--tea-green);
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .poi-popup-nav a:hover {
+            text-decoration: underline;
+        }
+
+        /* Responsive */
+        @media (max-width: 900px) {
+            .main-container {
+                grid-template-columns: 1fr;
+                height: auto;
+            }
+
+            .sidebar {
+                max-height: 50vh;
+                border-right: none;
+                border-bottom: 1px solid #E5E5E5;
+            }
+
+            .map-container {
+                height: 50vh;
+            }
+        }
+
+        /* Animations */
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        .marker-pulse {
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        /* Custom Marker */
+        .custom-marker {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 14px;
+            font-weight: 600;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.25);
+            border: 3px solid white;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        .custom-marker:hover {
+            transform: scale(1.15);
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <h1>🌏 老挝+云南 8天7夜</h1>
+        <p>万象 · 万荣 · 景迈山 · 普洱 · 大理 · 玉龙雪山 · 丽江</p>
+        <div class="header-stats">
+            <div class="stat">
+                <span class="stat-icon">🇱🇦</span>
+                <span>老挝3天</span>
+            </div>
+            <div class="stat">
+                <span class="stat-icon">🇨🇳</span>
+                <span>云南5天</span>
+            </div>
+            <div class="stat">
+                <span class="stat-icon">🚗</span>
+                <span>自驾850km</span>
+            </div>
+            <div class="stat">
+                <span class="stat-icon">📍</span>
+                <span>12个景点</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <div class="main-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <!-- Day 1: 老挝万象 -->
+            <div class="day-card active" data-day="1">
+                <div class="day-header" onclick="toggleDay(1)">
+                    <div class="day-badge" style="background: var(--day1-color)">
+                        <span>DAY</span>
+                        <span>1</span>
+                    </div>
+                    <div class="day-info">
+                        <div class="day-title">🇱🇦 抵达老挝万象</div>
+                        <div class="day-subtitle">中午到达 · 万象半日游 · 住万象</div>
+                    </div>
+                    <div class="day-toggle">▼</div>
+                </div>
+                <div class="day-content">
+                    <div class="day-content-inner">
+                        <div class="timeline">
+                            <div class="timeline-item highlight">
+                                <div class="timeline-time">12:00</div>
+                                <div class="timeline-title">✈️ 抵达万象瓦岱机场</div>
+                                <div class="timeline-desc">老挝首都，湄公河畔的悠闲城市</div>
+                                <span class="poi-tag" onclick="focusPOI('vientiane')">📍 查看地图</span>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-time">13:00</div>
+                                <div class="timeline-title">入住酒店 + 午餐</div>
+                                <div class="timeline-desc">推荐住湄公河边，方便看日落</div>
+                            </div>
+                            <div class="timeline-item highlight">
+                                <div class="timeline-time">14:30</div>
+                                <div class="timeline-title">塔銮 (That Luang)</div>
+                                <div class="timeline-desc">老挝国家象征，金色佛塔，必打卡</div>
+                            </div>
+                            <div class="timeline-item highlight">
+                                <div class="timeline-time">16:00</div>
+                                <div class="timeline-title">凯旋门 (Patuxai)</div>
+                                <div class="timeline-desc">万象地标，可登顶俯瞰城市</div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-time">17:30</div>
+                                <div class="timeline-title">湄公河边日落</div>
+                                <div class="timeline-desc">河边散步，看泰国对岸</div>
+                            </div>
+                            <div class="timeline-item highlight">
+                                <div class="timeline-time">19:00</div>
+                                <div class="timeline-title">万象夜市晚餐</div>
+                                <div class="timeline-desc">湄公河边夜市，老挝烧烤、啤酒</div>
+                            </div>
+                        </div>
+                        <div class="tips-box">
+                            <div class="tips-title">🇱🇦 万象景点推荐</div>
+                            <ul class="tips-list">
+                                <li><strong>塔銮</strong> - 老挝最神圣的佛塔，金光闪闪</li>
+                                <li><strong>凯旋门</strong> - 万象版凯旋门，可登顶</li>
+                                <li><strong>玉佛寺</strong> - 王室寺庙，精美壁画</li>
+                                <li><strong>湄公河边</strong> - 日落绝美，夜市热闹</li>
+                            </ul>
+                        </div>
+                        <div class="tips-box" style="background: linear-gradient(135deg, #FFF8F0 0%, #FFF5EB 100%);">
+                            <div class="tips-title" style="color: var(--warm-orange);">🍜 万象美食推荐</div>
+                            <ul class="tips-list">
+                                <li><strong>Khop Chai Deu</strong> - 老洋房餐厅，老挝菜+西餐</li>
+                                <li><strong>PVO越南河粉</strong> - 当地人气越南粉</li>
+                                <li><strong>湄公河夜市</strong> - 烧烤、法棍、老挝啤酒</li>
+                                <li><strong>Joma Bakery Cafe</strong> - 西式早餐咖啡</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Day 2: 万象→万荣 -->
+            <div class="day-card" data-day="2">
+                <div class="day-header" onclick="toggleDay(2)">
+                    <div class="day-badge" style="background: var(--day2-color)">
+                        <span>DAY</span>
+                        <span>2</span>
+                    </div>
+                    <div class="day-info">
+                        <div class="day-title">🇱🇦 万象 → 万荣</div>
+                        <div class="day-subtitle">小巴前往 · 万荣半日游 · 夜市</div>
+                    </div>
+                    <div class="day-toggle">▼</div>
+                </div>
+                <div class="day-content">
+                    <div class="day-content-inner">
+                        <div class="timeline">
+                            <div class="timeline-item">
+                                <div class="timeline-time">07:30</div>
+                                <div class="timeline-title">酒店早餐</div>
+                            </div>
+                            <div class="timeline-item highlight">
+                                <div class="timeline-time">09:00</div>
+                                <div class="timeline-title">🚐 乘小巴前往万荣</div>
+                                <div class="timeline-desc">万象北站出发，约3-4小时车程</div>
+                            </div>
+                            <div class="timeline-item highlight">
+                                <div class="timeline-time">13:00</div>
+                                <div class="timeline-title">抵达万荣</div>
+                                <div class="timeline-desc">小镇风光，南松河畔</div>
+                                <span class="poi-tag" onclick="focusPOI('vangvieng')">📍 查看地图</span>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-time">13:30</div>
+                                <div class="timeline-title">入住酒店 + 午餐</div>
+                                <div class="timeline-desc">推荐河景房，风景绝美</div>
+                            </div>
+                            <div class="timeline-item highlight">
+                                <div class="timeline-time">15:00</div>
+                                <div class="timeline-title">南松河漂流/皮划艇</div>
+                                <div class="timeline-desc">万荣经典项目，欣赏喀斯特地貌</div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-time">17:30</div>
+                                <div class="timeline-title">热气球观日落</div>
+                                <div class="timeline-desc">可选项目，俯瞰万荣全景</div>
+                            </div>
+                            <div class="timeline-item highlight">
+                                <div class="timeline-time">19:00</div>
+                                <div class="timeline-title">万荣夜市</div>
+                                <div class="timeline-desc">主街夜市，烧烤、啤酒、酒吧</div>
+                            </div>
+                        </div>
+                        <div class="drive-info">
+                            <span class="drive-icon">🚐</span>
+                            <div class="drive-text">
+                                万象 → 万荣：<strong>约150km / 3-4小时小巴</strong>
+                            </div>
+                        </div>
+                        <div class="tips-box">
+                            <div class="tips-title">🏞️ 万荣亮点</div>
+                            <ul class="tips-list">
+                                <li>喀斯特地貌 - 类似桂林，山水如画</li>
+                                <li>南松河 - 漂流、皮划艇、tubing</li>
+                                <li>热气球 - 日落时分最美</li>
+                                <li>户外天堂 - 攀岩、丛林飞跃</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Day 3: 万荣一日游 -->
+            <div class="day-card" data-day="3">
+                <div class="day-header" onclick="toggleDay(3)">
+                    <div class="day-badge" style="background: var(--day3-color)">
+                        <span>DAY</span>
+                        <span>3</span>
+                    </div>
+                    <div class="day-info">
+                        <div class="day-title">🇱🇦 万荣一日游</div>
+                        <div class="day-subtitle">旅行团 · 泄湖 · 丛林探险</div>
+                    </div>
+                    <div class="day-toggle">▼</div>
+                </div>
+                <div class="day-content">
+                    <div class="day-content-inner">
+                        <div class="timeline">
+                            <div class="timeline-item">
+                                <div class="timeline-time">08:00</div>
+                                <div class="timeline-title">酒店早餐</div>
+                            </div>
+                            <div class="timeline-item highlight">
+                                <div class="timeline-time">09:00</div>
+                                <div class="timeline-title">🎫 旅行团出发</div>
+                                <div class="timeline-desc">酒店接送，含午餐和门票</div>
+                            </div>
+                            <div class="timeline-item highlight">
+                                <div class="timeline-time">09:30</div>
+                                <div class="timeline-title">万荣泄湖 (Blue Lagoon)</div>
+                                <div class="timeline-desc">蓝绿色湖水，跳水、游泳、荡秋千</div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-time">11:00</div>
+                                <div class="timeline-title">探索洞穴</div>
+                                <div class="timeline-desc">Tham Phu Kham洞穴，卧佛</div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-time">12:30</div>
+                                <div class="timeline-title">午餐</div>
+                                <div class="timeline-desc">当地餐厅，老挝菜</div>
+                            </div>
+                            <div class="timeline-item highlight">
+                                <div class="timeline-time">14:00</div>
+                                <div class="timeline-title">丛林飞跃 Zipline</div>
+                                <div class="timeline-desc">穿越丛林，刺激好玩！</div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-time">16:00</div>
+                                <div class="timeline-title">返回万荣镇</div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-time">17:00</div>
+                                <div class="timeline-title">自由活动 / 休息</div>
+                                <div class="timeline-desc">河边咖啡馆放松</div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-time">19:00</div>
+                                <div class="timeline-title">晚餐 + 早睡</div>
+                                <div class="timeline-desc">明天早起坐火车去中国</div>
+                            </div>
+                        </div>
+                        <div class="tips-box">
+                            <div class="tips-title">🎫 一日游预订</div>
+                            <ul class="tips-list">
+                                <li>可在酒店前台或主街旅行社预订</li>
+                                <li>价格约$30-50/人，含接送+午餐+门票</li>
+                                <li>建议穿泳衣、带防水袋</li>
+                                <li>丛林飞跃需穿长裤运动鞋</li>
+                            </ul>
+                        </div>
+                        <div class="tips-box" style="background: linear-gradient(135deg, #FFF8F0 0%, #FFF5EB 100%);">
+                            <div class="tips-title" style="color: var(--warm-orange);">🚂 明日火车提醒</div>
+                            <ul class="tips-list">
+                                <li>早上9点火车，提前1小时到站</li>
+                                <li>万荣→磨憨口岸，过境后到西双版纳</li>
+                                <li>记得带好护照、签证</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Day 4: 万荣→西双版纳 (原Day 1) -->
+            <div class="day-card" data-day="4">
+                <div class="day-header" onclick="toggleDay(4)">
+                    <div class="day-badge" style="background: var(--day4-color)">
+                        <span>DAY</span>
+                        <span>4</span>
+                    </div>
+                    <div class="day-info">
+                        <div class="day-title">🚂 万荣 → 西双版纳 → 景迈山</div>
+                        <div class="day-subtitle">中老铁路 · 15:00拿车 · 住景迈山</div>
+                    </div>
+                    <div class="day-toggle">▼</div>
+                </div>
+                <div class="day-content">
+                    <div class="day-content-inner">
+                        <div class="timeline">
+                            <div class="timeline-item">
+                                <div class="timeline-time">07:00</div>
+                                <div class="timeline-title">万荣酒店退房</div>
+                                <div class="timeline-desc">前往万荣火车站</div>
+                            </div>
+                            <div class="timeline-item highlight">
+                                <div class="timeline-time">09:00</div>
+                                <div class="timeline-title">🚂 中老铁路出发</div>
+                                <div class="timeline-desc">万荣→磨憨口岸→西双版纳</div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-time">12:00</div>
+                                <div class="timeline-title">磨憨口岸过境</div>
+                                <div class="timeline-desc">老挝→中国，办理入境手续</div>
+                            </div>
+                            <div class="timeline-item highlight">
+                                <div class="timeline-time">14:30</div>
+                                <div class="timeline-title">抵达西双版纳站</div>
+                                <div class="timeline-desc">欢迎回到中国！</div>
+                                <span class="poi-tag" onclick="focusPOI('xishuangbanna')">📍 查看地图</span>
+                            </div>
+                            <div class="timeline-item highlight">
+                                <div class="timeline-time">15:00</div>
+                                <div class="timeline-title">🚗 火车站取车</div>
+                                <div class="timeline-desc">火车站取车点，开始云南自驾之旅</div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-time">15:30</div>
+                                <div class="timeline-title">出发前往景迈山</div>
+                                <div class="timeline-desc">沿途热带风光，经过澜沧县</div>
+                            </div>
+                            <div class="timeline-item highlight">
+                                <div class="timeline-time">19:30</div>
+                                <div class="timeline-title">抵达景迈山·翁基古寨</div>
+                                <div class="timeline-desc">布朗族古寨，世界文化遗产</div>
+                                <span class="poi-tag" onclick="focusPOI('wengji')">📍 查看地图</span>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-time">20:00</div>
+                                <div class="timeline-title">入住民宿 + 晚餐</div>
+                                <div class="timeline-desc">山野菜、土鸡、古树茶</div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-time">21:00</div>
+                                <div class="timeline-title">早睡</div>
+                                <div class="timeline-desc">为明天5:30看日出做准备</div>
+                            </div>
+                        </div>
+                        <div class="drive-info">
+                            <span class="drive-icon">🚂🚗</span>
+                            <div class="drive-text">
+                                万荣→西双版纳：<strong>约5h火车</strong> ｜ 西双版纳→景迈山：<strong>约200km / 4小时</strong>
+                            </div>
+                        </div>
+                        <div class="tips-box">
+                            <div class="tips-title">🚂 中老铁路提醒</div>
+                            <ul class="tips-list">
+                                <li>提前在12306买好票（万荣→西双版纳）</li>
+                                <li>过境需要护照和中国签证</li>
+                                <li>火车站取车点通常在出站口附近</li>
+                                <li>取车时检查车况、拍照留证</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Day 5 (原Day 2) -->
+            <div class="day-card" data-day="5">
+                <div class="day-header" onclick="toggleDay(5)">
+                    <div class="day-badge" style="background: var(--day5-color)">
+                        <span>DAY</span>
+                        <span>5</span>
+                    </div>
+                    <div class="day-info">
+                        <div class="day-title">景迈山 → 普洱</div>
+                        <div class="day-subtitle">日出云海 · 古茶林 · 住普洱</div>
+                    </div>
+                    <div class="day-toggle">▼</div>
+                </div>
+                <div class="day-content">
+                    <div class="day-content-inner">
+                        <div class="timeline">
+                            <div class="timeline-item highlight">
+                                <div class="timeline-time">05:30</div>
+                                <div class="timeline-title">翁基观景台看日出云海</div>
+                                <div class="timeline-desc">冬季最佳观赏期，震撼云海</div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-time">07:00</div>
+                                <div class="timeline-title">民宿早餐</div>
+                            </div>
+                            <div class="timeline-item highlight">
+                                <div class="timeline-time">08:00</div>
+                                <div class="timeline-title">景迈古茶林徒步</div>
+                                <div class="timeline-desc">千年古茶树，世界文化遗产核心区</div>
+                                <span class="poi-tag" onclick="focusPOI('chalin')">📍 查看地图</span>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-time">10:00</div>
+                                <div class="timeline-title">糯干古寨探访</div>
+                                <div class="timeline-desc">傣族古村落，传统干栏建筑</div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-time">11:30</div>
+                                <div class="timeline-title">出发返回普洱</div>
+                            </div>
+                            <div class="timeline-item highlight">
+                                <div class="timeline-time">14:00</div>
+                                <div class="timeline-title">普洱老街午餐</div>
+                                <div class="timeline-desc">米干、豆粉、烧烤，当地风味</div>
+                                <span class="poi-tag" onclick="focusPOI('puerlaojie')">📍 查看地图</span>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-time">15:30</div>
+                                <div class="timeline-title">普洱茶城买茶</div>
+                                <div class="timeline-desc">正宗普洱茶伴手礼</div>
+                                <span class="poi-tag" onclick="focusPOI('puertea')">📍 查看地图</span>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-time">17:00</div>
+                                <div class="timeline-title">入住普洱酒店</div>
+                                <div class="timeline-desc">休整，为明天长途做准备</div>
+                            </div>
+                        </div>
+                        <div class="drive-info">
+                            <span class="drive-icon">🚗</span>
+                            <div class="drive-text">
+                                景迈山 → 普洱：<strong>约150km / 2.5小时</strong>
+                            </div>
+                        </div>
+                        <div class="tips-box">
+                            <div class="tips-title">🍜 普洱美食店铺推荐</div>
+                            <ul class="tips-list">
+                                <li><strong>老思茅米干</strong> - 振兴路，当地人排队的老店</li>
+                                <li><strong>阿六烧烤</strong> - 思茅区，普洱最有名的烧烤店</li>
+                                <li><strong>王记豆粉</strong> - 老街附近，正宗思茅豆粉</li>
+                                <li><strong>普洱茶庄餐厅</strong> - 茶城内，茶香鸡、茶叶炒蛋</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Day 6 (原Day 3) -->
+            <div class="day-card" data-day="6">
+                <div class="day-header" onclick="toggleDay(6)">
+                    <div class="day-badge" style="background: var(--day6-color)">
+                        <span>DAY</span>
+                        <span>6</span>
+                    </div>
+                    <div class="day-info">
+                        <div class="day-title">普洱 → 大理</div>
+                        <div class="day-subtitle">洱海风光 · 住大理古城</div>
+                    </div>
+                    <div class="day-toggle">▼</div>
+                </div>
+                <div class="day-content">
+                    <div class="day-content-inner">
+                        <div class="timeline">
+                            <div class="timeline-item">
+                                <div class="timeline-time">07:00</div>
+                                <div class="timeline-title">早餐后出发</div>
+                                <div class="timeline-desc">今天车程较长，早点出发</div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-time">12:30</div>
+                                <div class="timeline-title">途中休息、午餐</div>
+                                <div class="timeline-desc">可在祥云或弥渡服务区</div>
+                            </div>
+                            <div class="timeline-item highlight">
+                                <div class="timeline-time">14:00</div>
+                                <div class="timeline-title">抵达大理·双廊古镇</div>
+                                <div class="timeline-desc">洱海最美观景点，面朝大海</div>
+                                <span class="poi-tag" onclick="focusPOI('shuanglang')">📍 查看地图</span>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-time">16:00</div>
+                                <div class="timeline-title">环洱海东线</div>
+                                <div class="timeline-desc">挖色镇、小普陀、海东公路</div>
+                            </div>
+                            <div class="timeline-item highlight">
+                                <div class="timeline-time">18:00</div>
+                                <div class="timeline-title">入住大理古城</div>
+                                <div class="timeline-desc">白族建筑，风花雪月</div>
+                                <span class="poi-tag" onclick="focusPOI('daligucheng')">📍 查看地图</span>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-time">19:00</div>
+                                <div class="timeline-title">古城晚餐 + 夜游</div>
+                                <div class="timeline-desc">人民路、洋人街漫步</div>
+                            </div>
+                        </div>
+                        <div class="drive-info">
+                            <span class="drive-icon">🚗</span>
+                            <div class="drive-text">
+                                普洱 → 大理：<strong>约350km / 5-6小时</strong>
+                            </div>
+                        </div>
+                        <div class="tips-box">
+                            <div class="tips-title">🍽️ 大理美食店铺推荐</div>
+                            <ul class="tips-list">
+                                <li><strong>再回首凉鸡米线</strong> - 人民路，大理必吃老字号</li>
+                                <li><strong>苍洱春餐厅</strong> - 古城内，砂锅鱼、酸辣鱼</li>
+                                <li><strong>玉洱园</strong> - 洱海门附近，烤乳扇、白族三道茶</li>
+                                <li><strong>双廊·半岛63号</strong> - 双廊镇，海景餐厅，洱海鱼</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Day 7 (原Day 4) -->
+            <div class="day-card" data-day="7">
+                <div class="day-header" onclick="toggleDay(7)">
+                    <div class="day-badge" style="background: var(--day7-color)">
+                        <span>DAY</span>
+                        <span>7</span>
+                    </div>
+                    <div class="day-info">
+                        <div class="day-title">大理 → 玉龙雪山 → 白沙</div>
+                        <div class="day-subtitle">雪山深度游 · 住白沙古镇</div>
+                    </div>
+                    <div class="day-toggle">▼</div>
+                </div>
+                <div class="day-content">
+                    <div class="day-content-inner">
+                        <div class="timeline">
+                            <div class="timeline-item">
+                                <div class="timeline-time">08:00</div>
+                                <div class="timeline-title">大理出发</div>
+                                <div class="timeline-desc">睡个好觉，从容出发</div>
+                            </div>
+                            <div class="timeline-item highlight">
+                                <div class="timeline-time">11:30</div>
+                                <div class="timeline-title">抵达玉龙雪山景区</div>
+                                <div class="timeline-desc">提前网上买票！冰川公园索道</div>
+                                <span class="poi-tag" onclick="focusPOI('yulongxueshan')">📍 查看地图</span>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-time">12:00</div>
+                                <div class="timeline-title">乘坐冰川公园大索道</div>
+                                <div class="timeline-desc">直达4506米，近距离观雪山</div>
+                            </div>
+                            <div class="timeline-item highlight">
+                                <div class="timeline-time">12:30</div>
+                                <div class="timeline-title">雪山山顶游览</div>
+                                <div class="timeline-desc">冰川栈道徒步，拍照打卡，慢慢感受</div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-time">14:00</div>
+                                <div class="timeline-title">索道下山 + 午餐</div>
+                                <div class="timeline-desc">景区内用餐，稍作休息</div>
+                            </div>
+                            <div class="timeline-item highlight">
+                                <div class="timeline-time">15:00</div>
+                                <div class="timeline-title">蓝月谷深度游览</div>
+                                <div class="timeline-desc">"小九寨"，蓝色湖水绝美，多拍几个点</div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-time">16:30</div>
+                                <div class="timeline-title">甘海子草甸</div>
+                                <div class="timeline-desc">雪山脚下的高山草甸，远眺雪山</div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-time">17:30</div>
+                                <div class="timeline-title">出发去白沙古镇</div>
+                                <div class="timeline-desc">雪山到白沙只需20分钟，很近！</div>
+                            </div>
+                            <div class="timeline-item highlight">
+                                <div class="timeline-time">17:50</div>
+                                <div class="timeline-title">抵达白沙古镇</div>
+                                <div class="timeline-desc">纳西族发源地，比丽江更原生态</div>
+                                <span class="poi-tag" onclick="focusPOI('baisha')">📍 查看地图</span>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-time">18:00</div>
+                                <div class="timeline-title">入住白沙民宿</div>
+                                <div class="timeline-desc">推荐雪山景观房，安静惬意</div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-time">19:00</div>
+                                <div class="timeline-title">白沙晚餐 + 日落漫步</div>
+                                <div class="timeline-desc">和叔食堂、白沙古街，看雪山日落</div>
+                            </div>
+                        </div>
+                        <div class="drive-info">
+                            <span class="drive-icon">🚗</span>
+                            <div class="drive-text">
+                                大理→雪山：<strong>约200km / 3h</strong> ｜ 雪山→白沙：<strong>约15km / 20min</strong>
+                            </div>
+                        </div>
+                        <div class="tips-box">
+                            <div class="tips-title">⛰️ 玉龙雪山攻略</div>
+                            <ul class="tips-list">
+                                <li>必须提前1天在公众号买票！</li>
+                                <li>海拔高，带氧气瓶、厚外套</li>
+                                <li>冰川公园索道最壮观（4506米）</li>
+                                <li>蓝月谷不要错过</li>
+                            </ul>
+                        </div>
+                        <div class="tips-box" style="background: linear-gradient(135deg, #FFF8F0 0%, #FFF5EB 100%);">
+                            <div class="tips-title" style="color: var(--warm-orange);">🍜 白沙古镇美食推荐</div>
+                            <ul class="tips-list">
+                                <li><strong>和叔食堂</strong> - 白沙古镇，农家菜、远眺雪山用餐</li>
+                                <li><strong>白沙古镇土鸡米线</strong> - 古镇入口，本地人推荐</li>
+                                <li><strong>雪山小院私房菜</strong> - 雪山景观餐厅，纳西烤肉</li>
+                                <li><strong>纳西奶奶家</strong> - 手工纳西粑粑、酥油茶</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Day 8 (原Day 5) -->
+            <div class="day-card" data-day="8">
+                <div class="day-header" onclick="toggleDay(8)">
+                    <div class="day-badge" style="background: var(--day8-color)">
+                        <span>DAY</span>
+                        <span>8</span>
+                    </div>
+                    <div class="day-info">
+                        <div class="day-title">白沙慢游 → 丽江古城 → ✈️ 飞回</div>
+                        <div class="day-subtitle">睡到自然醒 · 20:30航班</div>
+                    </div>
+                    <div class="day-toggle">▼</div>
+                </div>
+                <div class="day-content">
+                    <div class="day-content-inner">
+                        <div class="timeline">
+                            <div class="timeline-item">
+                                <div class="timeline-time">09:00</div>
+                                <div class="timeline-title">😴 睡到自然醒</div>
+                                <div class="timeline-desc">白沙古镇的清晨，安静惬意</div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-time">09:30</div>
+                                <div class="timeline-title">白沙早餐</div>
+                                <div class="timeline-desc">民宿早餐或古镇小店</div>
+                            </div>
+                            <div class="timeline-item highlight">
+                                <div class="timeline-time">10:00</div>
+                                <div class="timeline-title">白沙古镇深度游</div>
+                                <div class="timeline-desc">白沙壁画、扎染体验、纳西刺绣</div>
+                                <span class="poi-tag" onclick="focusPOI('baisha')">📍 查看地图</span>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-time">11:30</div>
+                                <div class="timeline-title">退房 · 出发去丽江</div>
+                                <div class="timeline-desc">白沙到丽江古城只需25分钟</div>
+                            </div>
+                            <div class="timeline-item highlight">
+                                <div class="timeline-time">12:00</div>
+                                <div class="timeline-title">抵达丽江古城</div>
+                                <div class="timeline-desc">纳西古城，世界文化遗产</div>
+                                <span class="poi-tag" onclick="focusPOI('lijianggucheng')">📍 查看地图</span>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-time">12:30</div>
+                                <div class="timeline-title">丽江午餐</div>
+                                <div class="timeline-desc">阿妈意腊排骨 或 88号小吃店</div>
+                            </div>
+                            <div class="timeline-item highlight">
+                                <div class="timeline-time">13:30</div>
+                                <div class="timeline-title">丽江古城漫步</div>
+                                <div class="timeline-desc">四方街、五一街、木府、狮子山</div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-time">16:00</div>
+                                <div class="timeline-title">买伴手礼</div>
+                                <div class="timeline-desc">鲜花饼、普洱茶、东巴纸</div>
+                            </div>
+                            <div class="timeline-item highlight">
+                                <div class="timeline-time">17:30</div>
+                                <div class="timeline-title">🚗 出发去机场</div>
+                                <div class="timeline-desc">丽江古城→三义机场约40分钟</div>
+                                <span class="poi-tag" onclick="focusPOI('airport')">📍 查看地图</span>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-time">18:15</div>
+                                <div class="timeline-title">抵达机场·还车</div>
+                                <div class="timeline-desc">机场还车点办理还车手续</div>
+                            </div>
+                            <div class="timeline-item highlight">
+                                <div class="timeline-time">20:30</div>
+                                <div class="timeline-title">✈️ 航班起飞</div>
+                                <div class="timeline-desc">结束美好的云南之旅！</div>
+                            </div>
+                        </div>
+                        <div class="drive-info">
+                            <span class="drive-icon">🚗</span>
+                            <div class="drive-text">
+                                白沙→丽江：<strong>25min</strong> ｜ 丽江→机场：<strong>40min</strong>
+                            </div>
+                        </div>
+                        <div class="tips-box">
+                            <div class="tips-title">✈️ 航班提醒</div>
+                            <ul class="tips-list">
+                                <li>航班 20:30，最晚17:30离开古城</li>
+                                <li>机场还车需预留15-20分钟</li>
+                                <li>提前在网上值机节省时间</li>
+                                <li>机场有鲜花饼、普洱茶伴手礼</li>
+                            </ul>
+                        </div>
+                        <div class="tips-box" style="background: linear-gradient(135deg, #F0F8F4 0%, #E8F5EC 100%);">
+                            <div class="tips-title" style="color: var(--tea-green);">🍜 束河/白沙美食推荐</div>
+                            <ul class="tips-list">
+                                <li><strong>束河·粗茶淡饭</strong> - 束河古镇，农家菜、土鸡火锅</li>
+                                <li><strong>束河三眼井餐厅</strong> - 古镇核心，纳西烤肉</li>
+                                <li><strong>白沙·和叔食堂</strong> - 白沙古镇，远眺雪山用餐</li>
+                                <li><strong>白沙锦绣艺术院</strong> - 可边看扎染边喝下午茶</li>
+                            </ul>
+                        </div>
+                        <div class="tips-box" style="background: linear-gradient(135deg, #FFF8F0 0%, #FFF5EB 100%);">
+                            <div class="tips-title" style="color: var(--warm-orange);">🏘️ 白沙古镇亮点</div>
+                            <ul class="tips-list">
+                                <li>白沙壁画 - 明代纳西族艺术瑰宝</li>
+                                <li>远眺玉龙雪山 - 最佳观景点之一</li>
+                                <li>纳西扎染 - 可体验手工制作</li>
+                                <li>比束河更原生态，商业化程度低</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Map -->
+        <div class="map-container">
+            <div id="map"></div>
+            
+            <!-- Legend -->
+            <div class="map-legend">
+                <div class="legend-title">📍 行程标注</div>
+                <div class="legend-items">
+                    <div class="legend-item">
+                        <div class="legend-dot" style="background: var(--day1-color)"></div>
+                        <span>Day 1-3 🇱🇦老挝</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-dot" style="background: var(--day4-color)"></div>
+                        <span>Day 4 入境/景迈</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-dot" style="background: var(--day5-color)"></div>
+                        <span>Day 5 普洱</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-dot" style="background: var(--day6-color)"></div>
+                        <span>Day 6 大理</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-dot" style="background: var(--day7-color)"></div>
+                        <span>Day 7 雪山/白沙</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-dot" style="background: var(--day8-color)"></div>
+                        <span>Day 8 丽江/飞回</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Controls -->
+            <div class="map-controls">
+                <button class="map-btn" onclick="resetMapView()" title="重置视图">🎯</button>
+                <button class="map-btn" onclick="toggleRoute()" title="显示/隐藏路线">🛤️</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // POI Data
+        const pois = {
+            // 老挝部分
+            vientiane: {
+                name: '老挝万象',
+                lnglat: [102.63, 17.97],
+                day: 1,
+                color: '#E74C3C',
+                desc: '老挝首都，湄公河畔，塔銮、凯旋门',
+                icon: '🇱🇦'
+            },
+            vangvieng: {
+                name: '万荣',
+                lnglat: [102.45, 18.93],
+                day: 2,
+                color: '#E67E22',
+                desc: '户外天堂，喀斯特地貌，南松河',
+                icon: '🏞️'
+            },
+            // 中国云南部分
+            xishuangbanna: {
+                name: '西双版纳火车站',
+                lnglat: [100.763, 21.973],
+                day: 4,
+                color: '#27AE60',
+                desc: '中老铁路终点，自驾起点',
+                icon: '🚂'
+            },
+            wengji: {
+                name: '翁基古寨',
+                lnglat: [100.02, 22.19],
+                day: 4,
+                color: '#27AE60',
+                desc: '布朗族古寨，世界文化遗产景迈山核心区',
+                icon: '🏘️'
+            },
+            chalin: {
+                name: '景迈古茶林',
+                lnglat: [100.03, 22.18],
+                day: 5,
+                color: '#4A7C59',
+                desc: '千年古茶树群落，世界文化遗产',
+                icon: '🌿'
+            },
+            puerlaojie: {
+                name: '普洱老街',
+                lnglat: [100.972, 22.787],
+                day: 5,
+                color: '#4A7C59',
+                desc: '振兴路美食街，当地人气餐饮聚集地',
+                icon: '🍜'
+            },
+            puertea: {
+                name: '普洱茶城',
+                lnglat: [100.98, 22.79],
+                day: 5,
+                color: '#4A7C59',
+                desc: '正宗普洱茶批发零售，价格实惠',
+                icon: '🍵'
+            },
+            shuanglang: {
+                name: '双廊古镇',
+                lnglat: [100.186, 25.948],
+                day: 6,
+                color: '#3D84A8',
+                desc: '洱海最美观景点，面朝大海春暖花开',
+                icon: '🌊'
+            },
+            daligucheng: {
+                name: '大理古城',
+                lnglat: [100.162, 25.694],
+                day: 6,
+                color: '#3D84A8',
+                desc: '白族古城，风花雪月，人民路夜生活',
+                icon: '🏯'
+            },
+            yulongxueshan: {
+                name: '玉龙雪山',
+                lnglat: [100.185, 27.096],
+                day: 7,
+                color: '#9B59B6',
+                desc: '冰川公园索道直达4506米，蓝月谷绝美',
+                icon: '🏔️'
+            },
+            baisha: {
+                name: '白沙古镇',
+                lnglat: [100.167, 26.952],
+                day: 7,
+                color: '#9B59B6',
+                desc: '纳西族发源地，白沙壁画必看，远眺玉龙雪山',
+                icon: '🎨'
+            },
+            lijianggucheng: {
+                name: '丽江古城',
+                lnglat: [100.234, 26.872],
+                day: 8,
+                color: '#E91E63',
+                desc: '纳西古城，世界文化遗产，四方街夜景',
+                icon: '🏮'
+            },
+            airport: {
+                name: '丽江三义机场',
+                lnglat: [100.246, 26.680],
+                day: 8,
+                color: '#E91E63',
+                desc: '丽江三义国际机场，距古城约28公里',
+                icon: '✈️'
+            }
+        };
+
+        // Route coordinates
+        const routeCoords = [
+            [102.63, 17.97],    // 老挝万象 (Day 1)
+            [102.45, 18.93],    // 万荣 (Day 2-3)
+            [100.763, 21.973],  // 西双版纳火车站 (Day 4)
+            [100.02, 22.19],    // 景迈山 (Day 4)
+            [100.972, 22.787],  // 普洱 (Day 5)
+            [100.162, 25.694],  // 大理
+            [100.186, 25.948],  // 双廊
+            [100.185, 27.096],  // 玉龙雪山
+            [100.234, 26.872],  // 丽江
+            [100.201, 26.912],  // 束河
+            [100.167, 26.952],  // 白沙
+            [100.246, 26.680]   // 机场
+        ];
+
+        let map;
+        let markers = {};
+        let routeLine;
+        let routeVisible = true;
+
+        // Initialize map
+        function initMap() {
+            map = new AMap.Map('map', {
+                zoom: 7,
+                center: [100.5, 25],
+                mapStyle: 'amap://styles/whitesmoke',
+                features: ['bg', 'road', 'building', 'point']
+            });
+
+            // Add markers
+            Object.keys(pois).forEach(key => {
+                const poi = pois[key];
+                addMarker(key, poi);
+            });
+
+            // Draw route
+            drawRoute();
+
+            // Fit bounds
+            setTimeout(() => {
+                const bounds = new AMap.Bounds();
+                Object.values(pois).forEach(poi => {
+                    bounds.extend(new AMap.LngLat(poi.lnglat[0], poi.lnglat[1]));
+                });
+                map.setBounds(bounds, false, [80, 80, 80, 80]);
+            }, 500);
+        }
+
+        function addMarker(key, poi) {
+            const markerContent = document.createElement('div');
+            markerContent.className = 'custom-marker';
+            markerContent.style.background = poi.color;
+            markerContent.innerHTML = poi.icon;
+
+            const marker = new AMap.Marker({
+                position: new AMap.LngLat(poi.lnglat[0], poi.lnglat[1]),
+                content: markerContent,
+                offset: new AMap.Pixel(-16, -16),
+                title: poi.name
+            });
+
+            // Info window content
+            const infoContent = `
+                <div class="poi-popup">
+                    <div class="poi-popup-day">Day ${poi.day}</div>
+                    <div class="poi-popup-title">${poi.icon} ${poi.name}</div>
+                    <div class="poi-popup-desc">${poi.desc}</div>
+                    <div class="poi-popup-nav">
+                        <a href="https://uri.amap.com/marker?position=${poi.lnglat[0]},${poi.lnglat[1]}&name=${encodeURIComponent(poi.name)}" target="_blank">
+                            🧭 高德导航
+                        </a>
+                    </div>
+                </div>
+            `;
+
+            const infoWindow = new AMap.InfoWindow({
+                content: infoContent,
+                offset: new AMap.Pixel(0, -20)
+            });
+
+            marker.on('click', () => {
+                infoWindow.open(map, marker.getPosition());
+            });
+
+            marker.setMap(map);
+            markers[key] = { marker, infoWindow };
+        }
+
+        function drawRoute() {
+            routeLine = new AMap.Polyline({
+                path: routeCoords.map(coord => new AMap.LngLat(coord[0], coord[1])),
+                strokeColor: '#4A7C59',
+                strokeWeight: 4,
+                strokeOpacity: 0.7,
+                strokeStyle: 'dashed',
+                lineJoin: 'round',
+                lineCap: 'round'
+            });
+            routeLine.setMap(map);
+        }
+
+        function focusPOI(key) {
+            const poi = pois[key];
+            if (poi && markers[key]) {
+                map.setZoomAndCenter(12, poi.lnglat);
+                markers[key].infoWindow.open(map, markers[key].marker.getPosition());
+                
+                // Scroll to corresponding day card
+                const dayCard = document.querySelector(`.day-card[data-day="${poi.day}"]`);
+                if (dayCard && !dayCard.classList.contains('active')) {
+                    toggleDay(poi.day);
+                }
+            }
+        }
+
+        function resetMapView() {
+            const bounds = new AMap.Bounds();
+            Object.values(pois).forEach(poi => {
+                bounds.extend(new AMap.LngLat(poi.lnglat[0], poi.lnglat[1]));
+            });
+            map.setBounds(bounds, false, [80, 80, 80, 80]);
+            
+            // Close all info windows
+            Object.values(markers).forEach(m => m.infoWindow.close());
+        }
+
+        function toggleRoute() {
+            routeVisible = !routeVisible;
+            if (routeVisible) {
+                routeLine.setMap(map);
+            } else {
+                routeLine.setMap(null);
+            }
+        }
+
+        function toggleDay(day) {
+            const cards = document.querySelectorAll('.day-card');
+            cards.forEach(card => {
+                if (parseInt(card.dataset.day) === day) {
+                    card.classList.toggle('active');
+                }
+            });
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            // Check if AMap is loaded
+            if (typeof AMap !== 'undefined') {
+                initMap();
+            } else {
+                console.warn('高德地图API未加载，请配置API Key');
+                document.getElementById('map').innerHTML = `
+                    <div style="display:flex;align-items:center;justify-content:center;height:100%;background:#f5f5f5;flex-direction:column;gap:16px;">
+                        <div style="font-size:48px;">🗺️</div>
+                        <div style="font-size:16px;color:#666;">请配置高德地图API Key</div>
+                        <div style="font-size:12px;color:#999;">在 index.html 中替换 your_amap_key_here</div>
+                        <a href="https://lbs.amap.com/api/javascript-api-v2/guide/abc/prepare" target="_blank" 
+                           style="font-size:13px;color:#4A7C59;text-decoration:underline;">
+                            获取高德地图API Key →
+                        </a>
+                    </div>
+                `;
+            }
+        });
+    </script>
+</body>
+</html>
+
